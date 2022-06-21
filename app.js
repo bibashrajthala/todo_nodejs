@@ -16,7 +16,8 @@ let ejs = require("ejs");
 
 ///////
 // importing index.js of routes folder
-let index = require("./routes/index");
+// let index = require("./routes/index");
+let todoRoutes = require("./routes/todoRoutes");
 let userRoute = require("./routes/userRoute");
 ///
 
@@ -33,7 +34,8 @@ db.once("open", () => {
 
 //////
 // using index imported above in app
-app.use("/", index);
+// app.use("/", index);
+app.use("/", todoRoutes);
 app.use("/user", userRoute);
 /////////////
 
