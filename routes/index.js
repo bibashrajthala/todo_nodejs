@@ -123,7 +123,7 @@ router.get("/editTodo/:id", (req, res) => {
   });
 });
 
-//
+//to update from ejs file
 router.post("/editForm", (req, res) => {
   console.log("editForm");
   console.log(req.body);

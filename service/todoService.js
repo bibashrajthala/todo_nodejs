@@ -33,7 +33,20 @@ const TodoService = () => {
     console.log("service", result);
     return result;
   };
-  return { getAll, create, updateById, updateByKey };
+
+  const updateWithId = async ({ id, name, deadline, points }) => {
+    const result = await TodoRepository.updateWithId({
+      id,
+      name,
+      deadline,
+      points,
+    });
+    console.log("controller", result);
+
+    return result;
+  };
+
+  return { getAll, create, updateById, updateByKey, updateWithId };
 };
 
 module.exports = TodoService;

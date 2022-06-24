@@ -1,4 +1,5 @@
 const TodoService = require("../service/todoService")();
+const createTodo = require("../validation/todoValidation");
 
 const TodoController = () => {
   const getAll = async (req, res, next) => {
@@ -15,6 +16,16 @@ const TodoController = () => {
       const name = req.body.name;
       const deadline = req.body.deadline;
       const points = req.body.points;
+
+      const { value, error } = await createTodo.validate({
+        name,
+        deadline,
+        points,
+      });
+      console.log(error);
+      if (error) {
+        throw error;
+      }
       const result = await TodoService.create({
         name,
         deadline,
@@ -56,7 +67,53 @@ const TodoController = () => {
     }
   };
 
-  return { getAll, create, updateById, updateByKey };
+  const createForm = async (req, res, next) => {
+    try {
+      res.render("form"); // name of ejs file you want to render
+    } catch (err) {
+      res.status(500).send(err);
+    }
+  };
+
+  const updateWithId = async (req, res, next) => {
+    try {
+      const id = req.params.id;
+      const name = req.body.name;
+      const deadline = req.body.deadline;
+      const points = req.body.points;
+      const result = await TodoService.updateWithId({
+        id,
+        name,
+        deadline,
+        points,
+      });
+      console.log("controller", result);
+
+      return res.status(200).send({
+        data: result,
+      });
+    } catch (err) {
+      res.status(500).send({ err: err });
+    }
+  };
+
+  const updateForm = async (req, res, next) => {
+    try {
+      res.render("editForm"); // name of ejs file you want to render
+    } catch (err) {
+      res.status(500).send(err);
+    }
+  };
+
+  return {
+    getAll,
+    create,
+    updateById,
+    updateByKey,
+    createForm,
+    updateForm,
+    updateWithId,
+  };
 };
 
 module.exports = TodoController;

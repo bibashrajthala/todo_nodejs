@@ -14,4 +14,8 @@ router.post("/addTodo", TodoController.create);
 router.patch("/updateById", TodoController.updateById);
 router.patch("/updateByKey", TodoController.updateByKey);
 
+router.get("/createForm", TodoController.createForm);
+router.patch("/updateWithId/:id", TodoController.updateWithId);
+router.get("/updateForm", TodoController.updateForm);
+
 module.exports = router;

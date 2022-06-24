@@ -8,7 +8,8 @@
   </head>
   <body>
     <!-- to '/add' route of index.js of routes folder of post method  -->
-    <form action="/editForm" method="post">
+    <!-- <form action="/editForm" method="post"> -->
+    <form action="/updateWithId/:id" method="post">
       <input type="text" name="id" value="<%= data.id %>" hidden /><br />
       name: <input type="text" name="name" value="<%= data.name %>" /><br />
       deadline:

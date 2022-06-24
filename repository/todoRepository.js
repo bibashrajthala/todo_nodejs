@@ -34,7 +34,19 @@ const TodoRepository = () => {
     console.log("repository", result);
     return result;
   };
-  return { getAll, create, updateById, updateByKey };
+
+  const updateWithId = async (args = {}) => {
+    const result = await Todo.findByIdAndUpdate(
+      { _id: args.id },
+      {
+        $set: { name: args.name, deadline: args.deadline, points: args.points },
+      }
+    );
+    console.log("repository", result);
+    return result;
+  };
+
+  return { getAll, create, updateById, updateByKey, updateWithId };
 };
 
 module.exports = TodoRepository;
