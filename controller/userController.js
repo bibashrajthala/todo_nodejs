@@ -33,6 +33,19 @@ const userController = () => {
     }
   };
 
+  const login = async (req, res, next) => {
+    try {
+      const result = await userService.login(req.body);
+      console.log(result);
+      return res.status(200).send({
+        data: result,
+      });
+    } catch (err) {
+      console.log(err, "error");
+      res.status(500).send(err);
+    }
+  };
+
   const updateById = async (req, res, next) => {
     try {
       const result = await userService.updateById(req.body);
@@ -50,6 +63,7 @@ const userController = () => {
     getAll,
     create,
     updateById,
+    login,
   };
 };
 

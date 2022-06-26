@@ -11,5 +11,6 @@ router.use(
 
 router.get("/users", UserController.getAll);
 router.post("/addUsers", UserController.create);
+router.post("/checklogin", UserController.login);
 
 module.exports = router;

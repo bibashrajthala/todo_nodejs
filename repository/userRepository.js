@@ -13,7 +13,13 @@ const UserRepository = () => {
     return result;
   };
 
-  return { getAll, create };
+  const findOne = async (args = {}) => {
+    const result = await User.findOne(args);
+    console.log(result);
+    return result;
+  };
+
+  return { getAll, create, findOne };
 };
 
 module.exports = UserRepository;

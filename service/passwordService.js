@@ -15,8 +15,17 @@ const passwordService = () => {
       console.log(err);
     }
   };
+
+  const comparePassword = async (formPassword, hashedPassword) => {
+    console.log(formPassword);
+    console.log(hashedPassword);
+    let result = await bcrypt.compare(formPassword, hashedPassword);
+    console.log(result);
+    return result;
+  };
   return {
     hashPassword,
+    comparePassword,
   };
 };
 module.exports = passwordService;
