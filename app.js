@@ -18,7 +18,9 @@ let ejs = require("ejs");
 // importing index.js of routes folder
 // let index = require("./routes/index");
 let todoRoutes = require("./routes/todoRoutes");
-let userRoute = require("./routes/userRoute");
+// let userRoute = require("./routes/userRoute");
+let userRoutes = require("./routes/userRoutes");
+let loginRoute = require("./routes/loginRoute");
 ///
 
 let app = express();
@@ -36,7 +38,9 @@ db.once("open", () => {
 // using index imported above in app
 // app.use("/", index);
 app.use("/", todoRoutes);
-app.use("/user", userRoute);
+// app.use("/user", userRoute);
+app.use("/user", userRoutes);
+app.use("/login", loginRoute);
 /////////////
 
 //for ejs
