@@ -36,7 +36,7 @@ const userController = () => {
   const login = async (req, res, next) => {
     try {
       const result = await userService.login(req.body);
-      console.log(result);
+      // console.log(result);
       return res.status(200).send({
         data: result,
       });

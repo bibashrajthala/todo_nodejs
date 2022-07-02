@@ -15,7 +15,7 @@ const UserRepository = () => {
 
   const findOne = async (args = {}) => {
     const result = await User.findOne(args);
-    console.log(result);
+    // console.log(result);
     return result;
   };
 

@@ -17,10 +17,10 @@ const passwordService = () => {
   };
 
   const comparePassword = async (formPassword, hashedPassword) => {
-    console.log(formPassword);
-    console.log(hashedPassword);
+    // console.log(formPassword);
+    // console.log(hashedPassword);
     let result = await bcrypt.compare(formPassword, hashedPassword);
-    console.log(result);
+    // console.log(result);
     return result;
   };
   return {
