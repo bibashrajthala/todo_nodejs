@@ -1,3 +1,5 @@
+const constants = require("../config/constants");
+
 const passwordService = require("./passwordService")();
 
 const userRepository = require("../repository/userRepository")();
@@ -15,13 +17,14 @@ const userService = () => {
   // const fitstName = args.firstName;
   // const lastName = args.lastName;
   //or do destructuring
-  const create = async ({ firstName, lastName, email, password }) => {
+  const create = async ({ firstName, lastName, email, password, role }) => {
     let hashPassword = await passwordService.hashPassword(password);
     const result = await userRepository.create({
       firstName,
       lastName,
       email,
       password: hashPassword,
+      role,
     });
     // console.log("service", result);
     return result;
@@ -45,11 +48,13 @@ const userService = () => {
     const payload = {
       id: user?._id,
       email: user?.email,
+      role: user?.role,
     };
 
     let accessTokenData = {
       payload: payload,
-      secret: "secret",
+      // secret: "secret",
+      secret: constants.tokenSecret,
       tokenLife: "15m",
     };
 
@@ -58,6 +63,7 @@ const userService = () => {
     return {
       id: user?._id,
       email: user?.email,
+      role: user?.role,
       token: token,
     };
   };

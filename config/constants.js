@@ -7,4 +7,5 @@ if (process.env.SALT_ROUNDS) {
 
 module.exports = {
   saltRound: saltRounds,
+  tokenSecret: process.env.TOKEN_SECRET || "secret",
 };

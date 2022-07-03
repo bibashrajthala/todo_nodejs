@@ -21,6 +21,11 @@ const UserSchema = mongoose.Schema({
   email: String,
   password: String,
   rePassword: String,
+  role: {
+    type: String,
+    enum: ["user", "admin"],
+    default: "user",
+  },
   createdDate: {
     type: Date,
     default: Date.now(),

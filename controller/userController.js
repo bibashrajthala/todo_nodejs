@@ -2,6 +2,7 @@ const userService = require("../service/userService")();
 
 const userController = () => {
   const getAll = async (req, res, next) => {
+    console.log(req.body, "controller");
     const result = await userService.getAll(req.body);
     // console.log("controller", result);
 
@@ -16,12 +17,14 @@ const userController = () => {
       const lastName = req.body.lastName;
       const email = req.body.email;
       const password = req.body.password;
+      const role = req.body.role;
 
       const result = await userService.create({
         firstName,
         lastName,
         email,
         password,
+        role,
       });
       console.log("controller", result);
 

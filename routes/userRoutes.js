@@ -2,6 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const router = express.Router();
 const UserController = require("../controller/userController")();
+let authenticate = require("../middleware/authentication");
 
 router.use(
   bodyParser.urlencoded({
@@ -9,8 +10,8 @@ router.use(
   })
 );
 
-router.get("/users", UserController.getAll);
-router.post("/addUsers", UserController.create);
-router.post("/checklogin", UserController.login);
+router.get("/users", authenticate, UserController.getAll);
+router.post("/register", UserController.create);
+router.post("/login", UserController.login);
 
 module.exports = router;
