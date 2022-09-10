@@ -12,11 +12,12 @@ const TodoService = () => {
   // const deadline = args.deadline;
   // const points = args.points;
   //or do destructuring
-  const create = async ({ name, deadline, points }) => {
+  const create = async ({ name, deadline, points, createdBy }) => {
     const result = await TodoRepository.create({
       name,
       deadline,
       points,
+      createdBy,
     });
     console.log("service", result);
     return result;
@@ -41,12 +42,24 @@ const TodoService = () => {
       deadline,
       points,
     });
-    console.log("controller", result);
+    console.log("service", result);
 
     return result;
   };
 
-  return { getAll, create, updateById, updateByKey, updateWithId };
+  const deleteById = async ({ id, name, deadline, points }) => {
+    const result = await TodoRepository.deleteById({
+      id,
+      name,
+      deadline,
+      points,
+    });
+    console.log("service", result);
+
+    return result;
+  };
+
+  return { getAll, create, updateById, updateByKey, updateWithId, deleteById };
 };
 
 module.exports = TodoService;

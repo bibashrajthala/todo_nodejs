@@ -9,7 +9,7 @@ const UserRepository = () => {
 
   const create = async (args = {}) => {
     const result = await User.create(args);
-    console.log("repository", result);
+    // console.log("repository", result);
     return result;
   };
 
@@ -19,7 +19,12 @@ const UserRepository = () => {
     return result;
   };
 
-  return { getAll, create, findOne };
+  const deleteById = async (args = {}) => {
+    const result = await User.findByIdAndDelete(args);
+    return result;
+  };
+
+  return { getAll, create, findOne, deleteById };
 };
 
 module.exports = UserRepository;

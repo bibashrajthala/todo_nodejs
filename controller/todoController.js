@@ -12,10 +12,12 @@ const TodoController = () => {
   };
 
   const create = async (req, res, next) => {
+    console.log(req.body);
     try {
       const name = req.body.name;
       const deadline = req.body.deadline;
       const points = req.body.points;
+      const createdBy = req.body.createdBy;
 
       const { value, error } = await createTodo.validate({
         name,
@@ -30,6 +32,7 @@ const TodoController = () => {
         name,
         deadline,
         points,
+        createdBy,
       });
       console.log("controller", result);
 
@@ -64,6 +67,19 @@ const TodoController = () => {
       });
     } catch (err) {
       res.status(500).send({ err: err });
+    }
+  };
+
+  const deleteById = async (req, res, next) => {
+    try {
+      const result = await TodoService.deleteById(req.body);
+      console.log("controller", result);
+
+      return res.status(200).send({
+        data: result,
+      });
+    } catch (err) {
+      console.log(err);
     }
   };
 
@@ -113,6 +129,7 @@ const TodoController = () => {
     createForm,
     updateForm,
     updateWithId,
+    deleteById,
   };
 };
 

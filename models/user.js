@@ -18,7 +18,12 @@ const UserSchema = mongoose.Schema({
   gender: String,
   phone: Number,
   address: String,
-  email: String,
+  // email: String,
+  email: {
+    type: String,
+    unique: true,
+    index: true,
+  },
   password: String,
   rePassword: String,
   role: {
@@ -32,4 +37,7 @@ const UserSchema = mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model("User", UserSchema); // model name is Todo and Schema passed on it is TodoSchema
+const User = mongoose.model("User", UserSchema);
+
+User.createIndexes();
+module.exports = User; // model name is Todo and Schema passed on it is TodoSchema

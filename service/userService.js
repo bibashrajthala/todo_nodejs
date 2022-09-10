@@ -31,10 +31,14 @@ const userService = () => {
   };
 
   const login = async (args = {}) => {
+    console.log(args, "service-login");
     let email = args.email;
     let password = args.password;
 
     let user = await userRepository.findOne({ email: email });
+    if (!user) {
+      throw new Error("User not found");
+    }
     // console.log(user?.password, "userPassword");
     // console.log(password, "formPassword");
     let compare = await passwordService.comparePassword(
@@ -74,7 +78,13 @@ const userService = () => {
     return result;
   };
 
-  return { getAll, create, updateById, login };
+  const deleteById = async (args = {}) => {
+    const result = await userRepository.deleteById(args);
+    // console.log("service", result);
+    return result;
+  };
+
+  return { getAll, create, updateById, login, deleteById };
 };
 
 module.exports = userService;

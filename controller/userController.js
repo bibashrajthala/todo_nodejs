@@ -2,7 +2,7 @@ const userService = require("../service/userService")();
 
 const userController = () => {
   const getAll = async (req, res, next) => {
-    console.log(req.body, "controller");
+    // console.log(req.body, "controller");
     const result = await userService.getAll(req.body);
     // console.log("controller", result);
 
@@ -18,6 +18,7 @@ const userController = () => {
       const email = req.body.email;
       const password = req.body.password;
       const role = req.body.role;
+      // or use destructuring const {role,firstName}=req.body;
 
       const result = await userService.create({
         firstName,
@@ -26,7 +27,7 @@ const userController = () => {
         password,
         role,
       });
-      console.log("controller", result);
+      // console.log("controller", result);
 
       return res.status(200).send({
         data: result,
@@ -38,21 +39,39 @@ const userController = () => {
 
   const login = async (req, res, next) => {
     try {
+      console.log(req, "controller-login");
+      // if (!req.body.email || !req.body.password) {
+      //   throw new Error("Data not recieived from frontend-Enter data");
+      // }
+
       const result = await userService.login(req.body);
       // console.log(result);
       return res.status(200).send({
         data: result,
       });
     } catch (err) {
-      console.log(err, "error");
-      res.status(500).send(err);
+      console.log(err.message, "error");
+      res.status(500).send(err.message);
     }
   };
 
   const updateById = async (req, res, next) => {
     try {
       const result = await userService.updateById(req.body);
-      console.log("controller", result);
+      // console.log("controller", result);
+
+      return res.status(200).send({
+        data: result,
+      });
+    } catch (err) {
+      res.status(500).send({ err: err });
+    }
+  };
+
+  const deleteById = async (req, res, next) => {
+    try {
+      const result = await userService.deleteById(req.body);
+      // console.log("controller", result);
 
       return res.status(200).send({
         data: result,
@@ -67,6 +86,7 @@ const userController = () => {
     create,
     updateById,
     login,
+    deleteById,
   };
 };
 

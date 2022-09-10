@@ -7,7 +7,7 @@ const authentication = async (req, res, next) => {
     if (!req.headers.authorization) {
       throw new Error("Token required");
     }
-    console.log(req.body, "authentication");
+    // console.log(req.body, "authentication");
     //   console.log(req.headers);
     //   console.log(req.headers.authorization);
 
@@ -15,7 +15,7 @@ const authentication = async (req, res, next) => {
     //   const token = bearerToken[1];
     //   or
     const [bearer, token] = req.headers.authorization.split(" ");
-    console.log("token---authentication\t", token);
+    // console.log("token---authentication\t", token);
 
     //   const tokenSecret = "secret";
     const tokenSecret = constants.tokenSecret;
@@ -26,7 +26,7 @@ const authentication = async (req, res, next) => {
     }
     next();
   } catch (err) {
-    console.log(err, "--error--");
+    console.log(err.message, "--error--");
     // res.status(500).send(err);
     res.status(500).send(err.message);
   }

@@ -10,10 +10,13 @@ router.use(
   })
 );
 
-router.get("/todos", isAdmin, TodoController.getAll);
-router.post("/addTodo", TodoController.create);
+// router.get("/todos", isAdmin, TodoController.getAll);
+router.get("/todos", TodoController.getAll);
+router.post("/addTodo", isAdmin, TodoController.create);
+// router.post("/addTodo", TodoController.create);
 router.patch("/updateById", TodoController.updateById);
 router.patch("/updateByKey", TodoController.updateByKey);
+router.delete("/delete", TodoController.deleteById);
 
 router.get("/createForm", TodoController.createForm);
 router.patch("/updateWithId/:id", TodoController.updateWithId);

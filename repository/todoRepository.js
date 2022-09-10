@@ -2,7 +2,11 @@ const Todo = require("../models/todo");
 
 const TodoRepository = () => {
   const getAll = async (args = {}) => {
-    const result = await Todo.find(args);
+    // const result = await Todo.find(args).populate('createdBy')
+    const result = await Todo.find(args).populate({
+      path: "createdBy",
+      select: ["firstName", "lastName", "email"],
+    });
     // console.log("repository", result);
     return result;
   };
@@ -45,8 +49,13 @@ const TodoRepository = () => {
     console.log("repository", result);
     return result;
   };
+  const deleteById = async (args = {}) => {
+    const result = await Todo.findByIdAndDelete({ _id: args.id }, args);
+    console.log("repository", result);
+    return result;
+  };
 
-  return { getAll, create, updateById, updateByKey, updateWithId };
+  return { getAll, create, updateById, updateByKey, updateWithId, deleteById };
 };
 
 module.exports = TodoRepository;
